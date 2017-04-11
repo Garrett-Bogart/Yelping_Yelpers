@@ -1,7 +1,7 @@
 class Business_Maker:
 
     def __init__(self):
-        business_dictionary = {}
+        self.business_dictionary = {}
 
     def readFile(self,path):
         fin = open(path, "r", encoding="utf8")
@@ -54,8 +54,8 @@ class Business_Maker:
             business_index[business[0]] = business[1]
         return business_index
 
-    def make(self):
-        formated = self.readFile("Business_Subset.txt")
+    def make(self, path):
+        formated = self.readFile(path)
         business_list = self.finalData(formated)
         self.business_dictionary = self.make_dictionary(business_list)
         print("business class")
