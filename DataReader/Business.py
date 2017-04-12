@@ -22,3 +22,15 @@ class Business:
 
     def addOneReview(self, rev):
         self.reviews.append(rev)
+
+    def getName(self):
+        return self.name
+
+    def getID(self):
+        return self.businessID
+
+    def addStars(self, add):
+         self.stars +=add
+
+    def __repr__(self):
+        return self.name +" "+ self.businessID +" "+ str(self.stars)+" "+ str(self.reviews)

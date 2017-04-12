@@ -60,6 +60,7 @@ class Business_Maker:
         self.business_dictionary = self.make_dictionary(business_list)
         print("business class")
         print(self.business_dictionary)
+        return(self.business_dictionary)
 
 class Review_Maker:
     def __init__(self):
@@ -125,4 +126,5 @@ class Review_Maker:
         temp2 = self.data(temp)
         self.make_dictionary(temp2)
         print(self.review_dictionary)
-        return
+        return self.review_dictionary
+
