@@ -1,14 +1,13 @@
 import Business as Bus
 import fileReader as fr
-import Review as Rev
 
-def main(args):
+def make_business_dictionary():
     business_class = []
     b = fr.Business_Maker()
     businesses = b.make("Business_Subset.txt")
     r = fr.Review_Maker()
     reviews = r.make("Reviews.txt")
-    #print(bus)
+    # print(bus)
     ID = 0
     TEXT = 2
     NAME = 0
@@ -17,14 +16,14 @@ def main(args):
         count = 0
         found = False
         text = []
-        if not business_class:#if the business_class list is empty add one review
+        if not business_class:  # if the business_class list is empty add one review
             text.append(reviews[review][TEXT].split("_"))
             business_class.append(
                 Bus.Business(reviews[review][ID], text, businesses[reviews[review][NAME]],
                              int(reviews[review][RATING])))
             continue
         for business in business_class:
-            count +=1
+            count += 1
             text.append(reviews[review][TEXT].split("_"))
             if business.getID() == reviews[review][ID]:
                 found = True
@@ -33,10 +32,33 @@ def main(args):
                 business.addOneReview(text)
                 break
             if found == False and count == len(business_class):
-                business_class.append(Bus.Business(reviews[review][ID],text,businesses[reviews[review][NAME]], int(reviews[review][RATING])))
+                business_class.append(Bus.Business(reviews[review][ID], text, businesses[reviews[review][NAME]],
+                                                   int(reviews[review][RATING])))
                 break
 
+
+    return business_class
+
+def query(restaraunt, business_class):
+    temp = []
+    for business in business_class:
+        if business.getName() == restaraunt:
+            temp.append(business)
+    print(temp)
+    return temp
+
+def main(args):
+    business_class = make_business_dictionary()
     print(business_class)
+    done = True
+    while done:
+        prompt = input("find a restaurant: ")
+        if prompt == "done":
+            done = False
+            break
+        else:
+            query(prompt, business_class)
+
 
 
 if __name__ == "__main__":

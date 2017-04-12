@@ -21,7 +21,7 @@ class Business_Maker:
                     if letter == ":":
                         temp += ':'
             formated.append(temp)
-        # print(formated)
+        print(formated)
         return formated
 
     def formating_one(self,final):
