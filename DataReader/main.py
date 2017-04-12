@@ -17,14 +17,14 @@ def make_business_dictionary():
         found = False
         text = []
         if not business_class:  # if the business_class list is empty add one review
-            text.append(reviews[review][TEXT].split("_"))
+            text.append(reviews[review][TEXT].replace("_", " "))
             business_class.append(
                 Bus.Business(reviews[review][ID], text, businesses[reviews[review][NAME]],
                              int(reviews[review][RATING])))
             continue
         for business in business_class:
             count += 1
-            text.append(reviews[review][TEXT].split("_"))
+            text.append(reviews[review][TEXT].replace("_", " "))
             if business.getID() == reviews[review][ID]:
                 found = True
             if found:

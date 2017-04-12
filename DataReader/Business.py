@@ -36,5 +36,5 @@ class Business:
         return self.stars/len(self.reviews)
 
     def __repr__(self):
-        #return self.name +" "+ self.businessID +" "+ str(self.stars)+" "+ str(len(self.reviews))
-        return self.name +" "+ str(self.getRanking())
+        return self.name +" Ranking:"+ str(self.getRanking())+" "+ str(self.reviews)
+        #return self.name +" "+ str(self.getRanking())
