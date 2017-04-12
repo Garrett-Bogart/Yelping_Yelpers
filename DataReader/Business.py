@@ -33,4 +33,4 @@ class Business:
          self.stars +=add
 
     def __repr__(self):
-        return self.name +" "+ self.businessID +" "+ str(self.stars)+" "+ str(self.reviews)
+        return self.name +" "+ self.businessID +" "+ str(self.stars)+" "+ str(len(self.reviews))

@@ -58,8 +58,8 @@ class Business_Maker:
         formated = self.readFile(path)
         business_list = self.finalData(formated)
         self.business_dictionary = self.make_dictionary(business_list)
-        print("business class")
-        print(self.business_dictionary)
+        #print("business class")
+        #print(self.business_dictionary)
         return(self.business_dictionary)
 
 class Review_Maker:
@@ -86,7 +86,7 @@ class Review_Maker:
                     if letter == " ":
                         temp+="_"
             formated.append(temp)
-        print(formated)
+        #print(formated)
         return formated
 
     def formater(self, final):
@@ -125,6 +125,6 @@ class Review_Maker:
         temp = self.readFile(path)
         temp2 = self.data(temp)
         self.make_dictionary(temp2)
-        print(self.review_dictionary)
+        #print(self.review_dictionary)
         return self.review_dictionary
 

@@ -14,18 +14,28 @@ def main(args):
     NAME = 0
     RATING = 1
     for review in reviews:
+        count = 0
+        found = False
+        text = []
         if not business_class:#if the business_class list is empty add one review
+            text.append(reviews[review][TEXT].split("_"))
             business_class.append(
-                Bus.Business(reviews[review][ID], reviews[review][TEXT].split("_"), businesses[reviews[review][NAME]],
+                Bus.Business(reviews[review][ID], text, businesses[reviews[review][NAME]],
                              int(reviews[review][RATING])))
+            continue
         for business in business_class:
+            count +=1
+            text.append(reviews[review][TEXT].split("_"))
             if business.getID() == reviews[review][ID]:
+                found = True
+            if found:
                 business.addStars(int(reviews[review][RATING]))
-                business.addOneReview(reviews[review][TEXT].split("_"))
+                business.addOneReview(text)
                 break
-            else:
-                business_class.append(Bus.Business(reviews[review][ID],reviews[review][TEXT].split("_"),businesses[reviews[review][NAME]], int(reviews[review][RATING])))
+            if found == False and count == len(business_class):
+                business_class.append(Bus.Business(reviews[review][ID],text,businesses[reviews[review][NAME]], int(reviews[review][RATING])))
                 break
+
     print(business_class)
 
 
