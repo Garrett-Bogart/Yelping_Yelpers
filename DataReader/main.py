@@ -1,5 +1,9 @@
 import Business as Bus
 import fileReader as fr
+import language_check
+
+tool = language_check.LanguageTool('en-US')
+text = 'A sentence with a error in the Hitchhiker’s Guide tot he Galaxy'
 
 def make_business_dictionary():
     business_class = []
@@ -17,10 +21,12 @@ def make_business_dictionary():
         found = False
         text = []
         if not business_class:  # if the business_class list is empty add one review
+            stars = []
             text.append(reviews[review][TEXT].replace("_", " "))
+            stars.append(int(reviews[review][RATING]))
             business_class.append(
                 Bus.Business(reviews[review][ID], text, businesses[reviews[review][NAME]],
-                             int(reviews[review][RATING])))
+                             stars))
             continue
         for business in business_class:
             count += 1
@@ -28,16 +34,28 @@ def make_business_dictionary():
             if business.getID() == reviews[review][ID]:
                 found = True
             if found:
-                business.addStars(int(reviews[review][RATING]))
+                business.addOneStar(int(reviews[review][RATING]))
                 business.addOneReview(text)
                 break
             if found == False and count == len(business_class):
+                temp = []
+                temp.append(int(reviews[review][RATING]))
                 business_class.append(Bus.Business(reviews[review][ID], text, businesses[reviews[review][NAME]],
-                                                   int(reviews[review][RATING])))
+                                                   temp))
                 break
-
-
+    grammarCheck(business_class)
     return business_class
+
+def grammarCheck(business_class):
+    for business in business_class:
+        reviews = business.getReviews()
+        for review in reviews:
+            temp = str(review)
+            mistakes=tool.check(temp)
+            business.addOneError((len(mistakes)))
+        #print(business)
+        business.getAdjustedRating()
+    return
 
 def query(restaraunt, business_class):
     temp = []
@@ -49,6 +67,7 @@ def query(restaraunt, business_class):
 
 def main(args):
     business_class = make_business_dictionary()
+    grammarCheck(business_class)
     print(business_class)
     done = True
     while done:
