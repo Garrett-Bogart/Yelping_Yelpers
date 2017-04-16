@@ -2,8 +2,8 @@ import Business as Bus
 import fileReader as fr
 import language_check
 
-tool = language_check.LanguageTool('en-US')
-text = 'A sentence with a error in the Hitchhiker’s Guide tot he Galaxy'
+#text = 'A sentence with a error in the Hitchhiker’s Guide tot he Galaxy'
+
 
 def make_business_dictionary():
     business_class = []
@@ -43,10 +43,11 @@ def make_business_dictionary():
                 business_class.append(Bus.Business(reviews[review][ID], text, businesses[reviews[review][NAME]],
                                                    temp))
                 break
-    grammarCheck(business_class)
     return business_class
 
+
 def grammarCheck(business_class):
+    tool = language_check.LanguageTool('en-US')
     for business in business_class:
         reviews = business.getReviews()
         for review in reviews:
@@ -57,6 +58,7 @@ def grammarCheck(business_class):
         business.getAdjustedRating()
     return
 
+
 def query(restaraunt, business_class):
     temp = []
     for business in business_class:
@@ -64,6 +66,7 @@ def query(restaraunt, business_class):
             temp.append(business)
     print(temp)
     return temp
+
 
 def main(args):
     business_class = make_business_dictionary()
@@ -77,8 +80,6 @@ def main(args):
             break
         else:
             query(prompt, business_class)
-
-
 
 if __name__ == "__main__":
     import sys

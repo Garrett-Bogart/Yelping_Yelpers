@@ -1,4 +1,6 @@
 import math
+
+
 class Business:
     def __init__(self, id = None, reviews = None, name = None, stars = None):
         self.adjusted_rating = 0
@@ -58,7 +60,6 @@ class Business:
             temp = math.log10(10+self.error_list[i])
             total += self.stars[i]/temp
         self.adjusted_rating = total/len(self.reviews)
-
 
     def __repr__(self):
         return self.name +" Ranking:"+ str(self.getRanking())+" Adjusted Rating:"+str(self.adjusted_rating)
