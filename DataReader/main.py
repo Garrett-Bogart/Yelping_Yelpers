@@ -3,8 +3,6 @@ import fileReader as fr
 import language_check
 from tkinter import *
 
-
-
 def make_business_dictionary():
     business_class = []
     b = fr.Business_Maker()
@@ -43,8 +41,8 @@ def make_business_dictionary():
                 business_class.append(Bus.Business(reviews[review][ID], text, businesses[reviews[review][NAME]],
                                                    temp))
                 break
-    grammarCheck(business_class)
     return business_class
+
 
 def grammarCheck(business_class):
     tool = language_check.LanguageTool('en-US')
@@ -58,6 +56,7 @@ def grammarCheck(business_class):
         business.getAdjustedRating()
     return
 
+
 def query(restaraunt, business_class):
     temp = []
     for business in business_class:
@@ -65,6 +64,7 @@ def query(restaraunt, business_class):
             temp.append(business)
     print(temp)
     return temp
+
 
 def main(args):
     business_index = make_business_dictionary()
@@ -90,6 +90,7 @@ def make_index():
     index = []
     index = main('blank')
 
+
 top = Tk()
 search_query = StringVar()
 
@@ -100,3 +101,4 @@ Button1 = Button(top,text = 'search', command = print_output).place(x = 0, y = 0
 Button2 = Button(top,text = 'make index',command = make_index).pack(side =BOTTOM)
 Entry1 = Entry(top,textvariable = search_query).place(x = 130, y = 0,width = 120, height = 25)
 top.mainloop()
+
