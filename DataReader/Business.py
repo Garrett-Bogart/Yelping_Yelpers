@@ -56,12 +56,14 @@ class Business:
     def getAdjustedRating(self):
         total = 0
         #temp = 0
+        error_total = 0
         for i in range(len(self.stars)):
-            temp = math.log10(10+self.error_list[i])
-            total += self.stars[i]/temp
-        self.adjusted_rating = total/len(self.reviews)
+            temp = 1/math.log10(10+self.error_list[i])
+            error_total+=temp
+            total += self.stars[i]*temp
+        self.adjusted_rating = total/error_total
 
     def __repr__(self):
         return self.name +" Ranking:"+ str(self.getRanking())+" Adjusted Rating:"+str(self.adjusted_rating)
-        #return (len(self.stars), len(self.error_list))
+        #return str((self.stars, self.error_list))
         #return self.name +" "+ str(self.getRanking())

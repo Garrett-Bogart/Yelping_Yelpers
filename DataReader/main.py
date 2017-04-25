@@ -41,6 +41,7 @@ def make_business_dictionary():
                 business_class.append(Bus.Business(reviews[review][ID], text, businesses[reviews[review][NAME]],
                                                    temp))
                 break
+    grammarCheck(business_class)
     return business_class
 
 
