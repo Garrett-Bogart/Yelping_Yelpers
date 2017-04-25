@@ -1,9 +1,9 @@
 import Business as Bus
 import fileReader as fr
 import language_check
+from tkinter import *
 
-tool = language_check.LanguageTool('en-US')
-text = 'A sentence with a error in the Hitchhiker’s Guide tot he Galaxy'
+
 
 def make_business_dictionary():
     business_class = []
@@ -47,6 +47,7 @@ def make_business_dictionary():
     return business_class
 
 def grammarCheck(business_class):
+    tool = language_check.LanguageTool('en-US')
     for business in business_class:
         reviews = business.getReviews()
         for review in reviews:
@@ -66,20 +67,36 @@ def query(restaraunt, business_class):
     return temp
 
 def main(args):
-    business_class = make_business_dictionary()
-    grammarCheck(business_class)
-    print(business_class)
-    done = True
-    while done:
-        prompt = input("find a restaurant: ")
-        if prompt == "done":
-            done = False
-            break
-        else:
-            query(prompt, business_class)
+    business_index = make_business_dictionary()
+    print(business_index)
+    return make_business_dictionary()
+    #print(business_class)
+    #done = True
+    #while done:
+        #prompt = input("find a restaurant: ")
+        #if args == "done":
+            #done = False
+            #break
+        #else:
+            #return query(args, business_class)
 
+def print_output():
+    search = search_query.get()
+    results = query(search,index)
+    label2 = Label(top, text = results).place(x = 0, y = 30)
 
+def make_index():
+    global index
+    index = []
+    index = main('blank')
 
-if __name__ == "__main__":
-    import sys
-    main(sys.argv)
+top = Tk()
+search_query = StringVar()
+
+top.geometry('450x450')
+top.title("Yelping Yelpers")
+
+Button1 = Button(top,text = 'search', command = print_output).place(x = 0, y = 0,width = 120, height = 25)
+Button2 = Button(top,text = 'make index',command = make_index).pack(side =BOTTOM)
+Entry1 = Entry(top,textvariable = search_query).place(x = 130, y = 0,width = 120, height = 25)
+top.mainloop()
